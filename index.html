@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ダイスケ(大学スケジュル管理）</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="user-profile">
+                <div class="greeting">
+                    <span class="sub">こんにちは、</span>
+                    <span class="name">自分の管理しましょう！</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" id="menu-btn"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>メニュー</h2>
+                <button class="icon-btn" id="close-sidebar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <button class="nav-item active" data-target="view-home">
+                        <i class="fa-solid fa-house"></i> ホーム
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-item" data-target="view-calendar">
+                        <i class="fa-solid fa-calendar-days"></i> カレンダー
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-item" data-target="view-memo">
+                        <i class="fa-solid fa-note-sticky"></i> メモ
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main id="main-content">
+            <!-- Views will be injected here -->
+
+            <!-- Home View (Default) -->
+            <section id="view-home" class="view active">
+                <div class="section-title">
+                    <h1>カテゴリー</h1>
+                </div>
+                <div class="category-grid">
+                    <button class="cat-card" data-category="assignment">
+                        <div class="icon-box assignment"><i class="fa-solid fa-book"></i></div>
+                        <span>課題</span>
+                        <div class="count-badge" id="count-assignment">0</div>
+                    </button>
+                    <button class="cat-card" data-category="attendance">
+                        <div class="icon-box attendance"><i class="fa-solid fa-user-check"></i></div>
+                        <span>出席</span>
+                        <div class="count-badge" id="count-attendance">0</div>
+                    </button>
+                    <button class="cat-card" data-category="parttime">
+                        <div class="icon-box parttime"><i class="fa-solid fa-briefcase"></i></div>
+                        <span>バイト</span>
+                        <div class="count-badge" id="count-parttime">0</div>
+                    </button>
+                    <button class="cat-card" data-category="event">
+                        <div class="icon-box event"><i class="fa-solid fa-calendar-star"></i></div>
+                        <span>行事</span>
+                        <div class="count-badge" id="count-event">0</div>
+                    </button>
+                    <button class="cat-card" data-category="other">
+                        <div class="icon-box other"><i class="fa-solid fa-ellipsis"></i></div>
+                        <span>その他</span>
+                        <div class="count-badge" id="count-other">0</div>
+                    </button>
+                </div>
+
+                <div class="section-title mt-4">
+                    <h1>今後の予定</h1>
+                    <a href="#" id="view-all-link">すべて表示</a>
+                </div>
+                <div class="upcoming-list" id="upcoming-list">
+                    <!-- Dynamic Content -->
+                </div>
+            </section>
+
+            <!-- Calendar View -->
+            <section id="view-calendar" class="view">
+                <div class="calendar-header">
+                    <button id="prev-month"><i class="fa-solid fa-chevron-left"></i></button>
+                    <h2 id="current-month-display">October 2023</h2>
+                    <button id="next-month"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div>S</div>
+                    <div>M</div>
+                    <div>T</div>
+                    <div>W</div>
+                    <div>T</div>
+                    <div>F</div>
+                    <div>S</div>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Dynamic Grid -->
+                </div>
+            </section>
+
+            <!-- List View (Category Detail) -->
+            <section id="view-list" class="view">
+                <div class="list-header">
+                    <button class="back-btn"><i class="fa-solid fa-arrow-left"></i></button>
+                    <h2 id="list-title">カテゴリー名</h2>
+                </div>
+                <div class="task-list" id="category-task-list">
+                    <!-- Dynamic List -->
+                </div>
+            </section>
+
+            <!-- Memo View -->
+            <section id="view-memo" class="view">
+                <div class="section-title">
+                    <h1>メモ</h1>
+                </div>
+                <div class="memo-container">
+                    <textarea id="memo-area" placeholder="ここにメモを入力..."></textarea>
+                </div>
+            </section>
+        </main>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="add-event-btn">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+
+    </div>
+
+    <!-- Add Event Modal -->
+    <div class="modal" id="modal-add-event">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>新規イベント</h2>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-event-form">
+                    <div class="form-group">
+                        <label>タイトル</label>
+                        <input type="text" id="event-title" required placeholder="予定の内容は？">
+                    </div>
+                    <div class="form-group">
+                        <label>カテゴリー</label>
+                        <div class="category-select">
+                            <input type="radio" name="category" value="assignment" id="cat-1" checked>
+                            <label for="cat-1" class="cat-pill assignment">課題</label>
+
+                            <input type="radio" name="category" value="attendance" id="cat-2">
+                            <label for="cat-2" class="cat-pill attendance">出席</label>
+
+                            <input type="radio" name="category" value="parttime" id="cat-3">
+                            <label for="cat-3" class="cat-pill parttime">バイト</label>
+
+                            <input type="radio" name="category" value="event" id="cat-4">
+                            <label for="cat-4" class="cat-pill event">行事</label>
+
+                            <input type="radio" name="category" value="other" id="cat-5">
+                            <label for="cat-5" class="cat-pill other">その他</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>日付</label>
+                        <input type="date" id="event-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>メモ</label>
+                        <textarea id="event-memo" rows="3" placeholder="詳細..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">イベント作成</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Day Details Modal -->
+    <div class="modal" id="modal-day-details">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="selected-date-title">日付</h2>
+                <button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="day-events-list" class="day-events-list">
+                    <!-- Events for the day -->
+                </div>
+                <button class="btn-secondary mt-2" id="add-event-on-day">ここにイベントを追加</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
