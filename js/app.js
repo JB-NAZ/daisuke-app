@@ -35,6 +35,7 @@ const elements = {
     },
     lists: {
         upcoming: document.getElementById('upcoming-list'),
+        important: document.getElementById('important-section'),
         category: document.getElementById('category-task-list'),
         day: document.getElementById('day-events-list')
     },
@@ -121,6 +122,7 @@ function setupEventListeners() {
             category: document.querySelector('input[name="category"]:checked').value,
             date: document.getElementById('event-date').value,
             memo: document.getElementById('event-memo').value,
+            isImportant: document.getElementById('event-important').checked,
             completed: false,
             createdAt: new Date().toISOString()
         };
@@ -211,6 +213,7 @@ function toggleComplete(id) {
 // Rendering
 function renderAll() {
     renderCounts();
+    renderImportant();
     renderUpcoming();
     renderCalendar();
     
@@ -243,6 +246,43 @@ function renderCounts() {
     }
 }
 
+
+
+function renderImportant() {
+    const list = elements.lists.important;
+    list.innerHTML = '';
+    
+    // Get important events
+    const today = new Date().toISOString().split('T')[0];
+    const important = state.events
+        .filter(e => e.isImportant && !e.completed)
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+    if (important.length === 0) {
+        list.style.display = 'none';
+        return;
+    }
+    
+    list.style.display = 'block';
+    
+    // Add title
+    const title = document.createElement('div');
+    title.className = 'section-title';
+    title.innerHTML = `<h1>重要</h1>`;
+    list.appendChild(title);
+    
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'column';
+    container.style.gap = '16px'; // var(--spacing-md)
+    
+    important.forEach(e => {
+        container.appendChild(createEventCard(e));
+    });
+    
+    list.appendChild(container);
+}
+
 function renderUpcoming() {
     const list = elements.lists.upcoming;
     list.innerHTML = '';
@@ -250,7 +290,7 @@ function renderUpcoming() {
     // Get future events, sort by date
     const today = new Date().toISOString().split('T')[0];
     const upcoming = state.events
-        .filter(e => e.date >= today && !e.completed)
+        .filter(e => e.date >= today && !e.completed && !e.isImportant)
         .sort((a, b) => new Date(a.date) - new Date(b.date))
         .slice(0, 5); // Show top 5
 
@@ -286,6 +326,7 @@ function createEventCard(e) {
             <div class="task-meta">
                 <span><i class="fa-regular fa-calendar"></i> ${formatDate(e.date)}</span>
                 ${e.memo ? '<span><i class="fa-solid fa-note-sticky"></i></span>' : ''}
+                ${e.isImportant ? '<span class="badge-important">重要</span>' : ''}
             </div>
             ${reminderHtml}
         </div>

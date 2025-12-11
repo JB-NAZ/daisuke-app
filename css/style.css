@@ -34,6 +34,10 @@
     --shadow-glow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+#important-section {
+    margin-bottom: var(--spacing-lg);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -326,12 +330,27 @@ body {
     align-items: center;
     gap: 4px;
 
-    color: var(--cat-assignment);
+    color: #ff9f43;
+    /* Orange for deadline/kigen */
     font-size: 0.7rem;
     font-weight: bold;
 
     margin-top: 4px;
     /* Add some spacing */
+}
+
+.badge-important {
+    display: inline-flex;
+    align-items: center;
+    background-color: #ff4757;
+    /* Red for Important/Juyou */
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+    box-shadow: 0 2px 5px rgba(255, 71, 87, 0.3);
 }
 
 /* Calendar */
