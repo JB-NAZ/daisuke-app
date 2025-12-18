@@ -15,7 +15,7 @@ AIを活用した開発プロセスの一環として作成されました。
 - → ○: Completed
 
 **2.Editing an event**
-- → ×: Clicking a registered event does not allow editing of the date, event name, memo, etc.
+- → ◯: Clicking a registered event does not allow editing of the date, event name, memo, etc.
 
 **3.Deleting an event**
 - → ○: Completed
@@ -30,10 +30,10 @@ AIを活用した開発プロセスの一環として作成されました。
 - → ×: Clicking an event does not display the memo
 
 **7.Checking assignments**
-- → ○: Items under 「課題」 cannot be deleted from the 「課題」 category
+- → ◎: Items under 「課題」 cannot be deleted from the 「課題」 category
 
 **8.Back button**
-- → ◎: Fully completed
+- → ×: does not have css
 
 
 ## 技術スタック (Tech Stack)
