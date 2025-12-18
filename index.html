@@ -183,7 +183,8 @@
                 <form id="add-event-form">
                     <div class="form-group">
                         <label>タイトル</label>
-                        <input type="text" id="event-title" required placeholder="予定の内容は？">
+                        <input type="text" id="event-title" required oninvalid="this.setCustomValidity('タイトル忘れましたか？')"
+                            oninput="this.setCustomValidity('')" placeholder="予定の内容は？">
                     </div>
                     <div class="form-group">
                         <label>カテゴリー</label>

@@ -117,7 +117,19 @@ function setupEventListeners() {
     elements.forms.addEvent.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        
+        const dateInput = document.getElementById('event-date');
+        const selectedDate = dateInput.value;
+        const today = new Date().toISOString().split('T')[0];
+
+        // 日付が過去の場合、エラー表示
+        if (selectedDate < today) {
+            dateInput.setCustomValidity('過去の日付は選択できません。');
+            dateInput.reportValidity();
+            return; 
+        } else {
+            dateInput.setCustomValidity('');
+        }
+
         const newEvent = {
             id: Date.now().toString(),
             title: document.getElementById('event-title').value,
