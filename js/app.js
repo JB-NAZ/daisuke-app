@@ -258,13 +258,15 @@ function renderAll() {
     renderCalendar();
     
     // Refresh active list view if open
-    const listTitle = document.getElementById('list-title').textContent;
     if (document.getElementById('view-list').classList.contains('active')) {
-        // Reverse lookup category from title or just re-run filter based on current knowledge
-        // Easier way: store currentCategory in state
         if (state.currentCategory) {
             showCategoryList(state.currentCategory);
         }
+    }
+
+    // Refresh day details modal if open
+    if (elements.modals.dayDetails.classList.contains('open') && state.selectedDate) {
+        renderDayDetailsContents(state.selectedDate);
     }
 }
 
@@ -434,6 +436,11 @@ function renderCalendar() {
 
 function openDayDetails(dateStr) {
     state.selectedDate = dateStr;
+    renderDayDetailsContents(dateStr);
+    openModal('dayDetails');
+}
+
+function renderDayDetailsContents(dateStr) {
     document.getElementById('selected-date-title').textContent = formatDate(dateStr);
     
     const list = elements.lists.day;
@@ -448,8 +455,6 @@ function openDayDetails(dateStr) {
             list.appendChild(createEventCard(e));
         });
     }
-    
-    openModal('dayDetails');
 }
 
 function showCategoryList(category) {
