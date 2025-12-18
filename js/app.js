@@ -154,6 +154,15 @@ function setupEventListeners() {
         closeAllModals();
     });
 
+    // Delete Event from Edit Modal
+    document.getElementById('delete-event-from-edit').addEventListener('click', () => {
+        const id = document.getElementById('edit-event-id').value;
+        if (id) {
+            deleteEvent(id); // Uses existing delete logic with confirm
+            closeAllModals();
+        }
+    });
+
     // Calendar Navigation
     elements.calendar.prevBtn.addEventListener('click', () => {
         state.currentDate.setMonth(state.currentDate.getMonth() - 1);

@@ -12,8 +12,9 @@
     --secondary: #6c5ce7;
     /* Keep purple/blue as secondary accent but subtle */
 
-    /* Category Colors - Pastel/Softer */
-    --cat-assignment: #ff7675;
+    /* Category Colors - Muted/Premium */
+    --cat-assignment: #fde2e2;
+    /* Muted Red-pink */
     --cat-attendance: #74b9ff;
     --cat-parttime: #55efc4;
     --cat-event: #a29bfe;
@@ -342,15 +343,14 @@ body {
 .badge-important {
     display: inline-flex;
     align-items: center;
-    background-color: #ff4757;
-    /* Red for Important/Juyou */
-    color: white;
+    background-color: #fde2e2;
+    color: #e03131;
     font-size: 0.7rem;
     font-weight: bold;
     padding: 2px 8px;
     border-radius: 12px;
     margin-left: 8px;
-    box-shadow: 0 2px 5px rgba(255, 71, 87, 0.3);
+    border: 1px solid rgba(224, 49, 49, 0.2);
 }
 
 /* Calendar */
@@ -664,7 +664,8 @@ textarea:focus {
 
 input:checked+.cat-pill.assignment {
     background: var(--cat-assignment);
-    color: #000;
+    color: #e03131;
+    border-color: rgba(224, 49, 49, 0.3);
 }
 
 input:checked+.cat-pill.attendance {
@@ -684,7 +685,17 @@ input:checked+.cat-pill.event {
 
 input:checked+.cat-pill.other {
     background: var(--cat-other);
-    color: #000;
+    cursor: pointer;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.modal-actions button {
+    flex: 1;
 }
 
 .btn-primary {
@@ -709,6 +720,35 @@ input:checked+.cat-pill.other {
     color: var(--text-primary);
     font-weight: 600;
     cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.btn-danger {
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    background: #fde2e2;
+    border: 1px solid rgba(224, 49, 49, 0.2);
+    color: #e03131;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: var(--spacing-md);
+    transition: transform 0.1s, background 0.2s;
+}
+
+.btn-primary:active,
+.btn-danger:active,
+.btn-secondary:active {
+    transform: scale(0.96);
+}
+
+.btn-danger:hover {
+    background: #faecec;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
 }
 
 /* Memo */
