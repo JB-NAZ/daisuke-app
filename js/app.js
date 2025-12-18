@@ -128,6 +128,9 @@ function setupEventListeners() {
             return; 
         } else {
             dateInput.setCustomValidity('');
+            dateInput.reportValidity();
+
+            console.log('日付は今日または未来の日付です。');
         }
 
         const newEvent = {
@@ -145,8 +148,16 @@ function setupEventListeners() {
         closeAllModals();
         e.target.reset();
         
-        // Reset date to today or selected
-        document.getElementById('event-date').valueAsDate = new Date();
+        // Reset date to today or selected and CLEAR VALIDITY
+        const dateInputNew = document.getElementById('event-date');
+        dateInputNew.valueAsDate = new Date();
+        dateInputNew.setCustomValidity('');
+    });
+
+    // Clear validation error on date change
+    document.getElementById('event-date').addEventListener('input', (e) => {
+        e.target.setCustomValidity('');
+        e.target.reportValidity();
     });
 
 
@@ -211,7 +222,9 @@ function setupEventListeners() {
     // Add Event from Day Modal
     document.getElementById('add-event-on-day').addEventListener('click', () => {
         if (state.selectedDate) {
-            document.getElementById('event-date').value = state.selectedDate;
+            const dateInput = document.getElementById('event-date');
+            dateInput.value = state.selectedDate;
+            dateInput.setCustomValidity(''); // Clear any previous errors
             closeAllModals();
             openModal('addEvent');
         }
