@@ -12,9 +12,8 @@
     --secondary: #6c5ce7;
     /* Keep purple/blue as secondary accent but subtle */
 
-    /* Category Colors - Muted/Premium */
-    --cat-assignment: #fde2e2;
-    /* Muted Red-pink */
+    /* Category Colors - Pastel/Softer */
+    --cat-assignment: #ff7675;
     --cat-attendance: #74b9ff;
     --cat-parttime: #55efc4;
     --cat-event: #a29bfe;
@@ -343,14 +342,14 @@ body {
 .badge-important {
     display: inline-flex;
     align-items: center;
-    background-color: #fde2e2;
-    color: #e03131;
+    background-color: #d63031;
+    color: white;
     font-size: 0.7rem;
     font-weight: bold;
     padding: 2px 8px;
     border-radius: 12px;
     margin-left: 8px;
-    border: 1px solid rgba(224, 49, 49, 0.2);
+    /* Removed shadow/glow for flat look */
 }
 
 /* Calendar */
@@ -664,8 +663,7 @@ textarea:focus {
 
 input:checked+.cat-pill.assignment {
     background: var(--cat-assignment);
-    color: #e03131;
-    border-color: rgba(224, 49, 49, 0.3);
+    color: #000;
 }
 
 input:checked+.cat-pill.attendance {
@@ -727,9 +725,9 @@ input:checked+.cat-pill.other {
     width: 100%;
     padding: 14px;
     border-radius: var(--radius-md);
-    background: #fde2e2;
-    border: 1px solid rgba(224, 49, 49, 0.2);
-    color: #e03131;
+    background: #d63031;
+    border: none;
+    color: white;
     font-weight: 700;
     font-size: 1rem;
     cursor: pointer;
@@ -744,7 +742,7 @@ input:checked+.cat-pill.other {
 }
 
 .btn-danger:hover {
-    background: #faecec;
+    background: #c23616;
 }
 
 .btn-primary:hover {
